@@ -1,0 +1,51 @@
+{
+    "dataset": {
+      "source": "serpilturanyksel/adult-income",
+      "path": "data/adult.csv",
+      "delimiter": ",",
+      "target_column": "income"
+    },
+    "preprocessing": {
+      "select_columns": ["age", "education", "hours-per-week", "occupation"],
+      "categorical_columns": ["education", "occupation"],
+      "numerical_columns": ["age", "hours-per-week"],
+      "missing_value_strategy": {
+        "numerical": "mean",
+        "categorical": "most_frequent"
+      },
+      "scaling": "standard"
+    },
+    "models": [
+      {
+        "name": "random_forest",
+        "enabled": true,
+        "params": {
+          "n_estimators": 100,
+          "max_depth": 10,
+          "random_state": 42
+        }
+      },
+      {
+        "name": "logistic_regression",
+        "enabled": false,
+        "params": {
+          "penalty": "l2",
+          "solver": "liblinear"
+        }
+      }
+    ],
+    "validation": {
+      "test_size": 0.2,
+      "random_state": 42,
+      "cross_validation": {
+        "enabled": true,
+        "folds": 5
+      }
+    },
+    "output": {
+      "model_path": "models/",
+      "metrics_path": "metrics/",
+      "logs_path": "logs/"
+    }
+  }
+  
