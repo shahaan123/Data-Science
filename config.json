@@ -6,7 +6,7 @@
       "target_column": "income"
     },
     "preprocessing": {
-      "select_columns": ["age", "education", "hours-per-week", "occupation"],
+      "select_columns": ["workclass", "education", "marital-status", "occupation", "relationship", "race", "gender",  "capital-gain_log", "capital-loss_log", "age_log", "fnlwgt_log", "hours-per-week_log", "native-country-grouped"],
       "categorical_columns": ["education", "occupation"],
       "numerical_columns": ["age", "hours-per-week"],
       "missing_value_strategy": {
@@ -31,6 +31,24 @@
         "params": {
           "penalty": "l2",
           "solver": "liblinear"
+        }
+      },
+      {
+        "name": "lgbm",
+        "enabled": true,
+        "params": {
+          "boosting_type": "gbdt",
+          "objective": "binary",
+          "metric": "binary_logloss",
+          "learning_rate": 0.05,
+          "num_leaves": 31,
+          "max_depth": -1,
+          "min_data_in_leaf": 20,
+          "feature_fraction": 0.9,
+          "bagging_fraction": 0.8,
+          "bagging_freq": 5,
+          "verbose": -1,
+          "random_state": 42
         }
       }
     ],
